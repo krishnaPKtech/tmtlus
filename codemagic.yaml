@@ -12,11 +12,12 @@ workflows:
 
       - name: Install pods
         script: |
-          find . -name "Podfile" -execdir pod install \;
+          cd ios
+          pod install --repo-update
 
       - name: Flutter build ipa (Development)
         script: |
-          flutter build ios --debug
+          flutter build ios --debug --no-codesign
 
     artifacts:
       - build/ios/iphoneos/*.app
