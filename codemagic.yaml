@@ -1,4 +1,7 @@
-  scripts:
+workflows:
+  ios-workflow:
+    name: iOS Workflow
+      scripts:
 
     - name: Set up code signing settings on Xcode project
 
