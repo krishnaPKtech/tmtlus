@@ -3,27 +3,20 @@ workflows:
     name: iOS Workflow
     environment:
       flutter: stable
-      xcode: latest  # Use the latest Xcode version
-      cocoapods: default  # Ensure CocoaPods is available
+      xcode: latest
+      cocoapods: default
 
     scripts:
-      - name: Set up code signing settings on Xcode project
-        script: xcode-project use-profiles
-
       - name: Get Flutter packages
         script: flutter pub get
 
-      - name: Install CocoaPods
+      - name: Install pods
         script: |
-         cd ios
-         pod install --repo-update
+          find . -name "Podfile" -execdir pod install \;
 
-      - name: Flutter build ipa
+      - name: Flutter build ipa (Development)
         script: |
-          flutter build ipa --release \
-            --export-method app-store  # Can be 'ad-hoc' or 'development' if testing
+          flutter build ios --debug
 
     artifacts:
-      - build/ios/ipa/*.ipa  # Correct path for iOS artifacts
-      - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
+      - build/ios/iphoneos/*.app
