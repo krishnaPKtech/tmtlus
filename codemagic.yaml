@@ -20,8 +20,7 @@ workflows:
       - name: Flutter build ipa
         script: |
           flutter build ipa --release \
-            --build-name=1.0.0 \
-            --export-options-plist=/Users/builder/export_options.plist
+            --export-method app-store  # Can be 'ad-hoc' or 'development' if testing
 
     artifacts:
       - build/ios/ipa/*.ipa  # Correct path for iOS artifacts
